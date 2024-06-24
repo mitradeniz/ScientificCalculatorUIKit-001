@@ -11,7 +11,6 @@ import Darwin
 class ViewController: UIViewController {
     
     var currentNumber: Double = 0
-    var parenthesesStack: [String] = []
     var operations: [String] = []
     var performingOperation = false
     var labelText: String = ""
