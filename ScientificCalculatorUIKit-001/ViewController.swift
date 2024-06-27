@@ -46,6 +46,10 @@ class ViewController: UIViewController {
     
     
     @IBAction func digitButtonPressed(_ sender: UIButton) {
+        print("operations: ", operations)
+        print("performingOperation: ", performingOperation)
+        print("labelText: ", labelText)
+        print("completeExpression: ", completeExpression)
         if let digit = sender.titleLabel?.text {
             if performingOperation {
                 labelText = digit
