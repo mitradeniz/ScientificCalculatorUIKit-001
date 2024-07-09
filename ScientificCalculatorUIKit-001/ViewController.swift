@@ -149,7 +149,7 @@ class ViewController: UIViewController {
         if !tmp.isEmpty {
             operations.append(tmp)
         }
-        print(operations)
+        print("equals button opeartions list: ", operations)
         
         print(completeExpression)
 
@@ -378,4 +378,3 @@ class ViewController: UIViewController {
     
 
 }
-
