@@ -116,43 +116,42 @@ class ViewController: UIViewController {
         operations.removeAll()
         var tmp = ""
         var isNegativeNumber = false
-
-        for i in completeExpression {
-            
-            if "+-x/^".contains(i) {
+        
+        for (index, char) in completeExpression.enumerated() {
+            if "+-x/^".contains(char) {
                 if !tmp.isEmpty {
                     operations.append(tmp)
                     tmp = ""
                 }
-                operations.append(String(i))
-            }
-            else if i == "(" {
+                if char == "-", index == 0 || "+-x/^(".contains(completeExpression[completeExpression.index(completeExpression.startIndex, offsetBy: index - 1)]) {
+                    tmp += "-"
+                } else {
+                    operations.append(String(char))
+                }
+            } else if char == "(" {
                 if !tmp.isEmpty {
                     operations.append(tmp)
                     tmp = ""
                 }
                 operations.append("(")
-            }
-            else if i == ")" {
+            } else if char == ")" {
                 if !tmp.isEmpty {
                     operations.append(tmp)
                     tmp = ""
                 }
                 operations.append(")")
-            }
-            else {
-                tmp += String(i)
+            } else {
+                tmp += String(char)
             }
         }
 
-        // Eğer döngü bittiğinde tmp'de hala bir değer varsa, operations'a ekle
         if !tmp.isEmpty {
             operations.append(tmp)
         }
-        print("equals button opeartions list: ", operations)
         
+        print("equals button operations list: ", operations)
         print(completeExpression)
-
+        
         let rpnExpression = convertToRPN(operations)
         let result = evaluateRPN(rpnExpression)
         displayLabel.text = result == nil ? "Error" : formatResult(result!)
@@ -165,7 +164,7 @@ class ViewController: UIViewController {
             completeExpression = labelText
         }
     }
-    
+
     @IBAction func parenthesisButtonPressed(_ sender: UIButton) {
         if let parenthesis = sender.titleLabel?.text {
             operations.append(parenthesis)
